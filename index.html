@@ -4,16 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n="docTitle">Báo cáo Hiệu suất Chất lượng (직행율, 불량율, 수율)</title>
-    
-    <!-- Fonts -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Icons -->
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Libraries -->
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -90,7 +87,7 @@
 
         .subtitle {
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 0.95 rem;
         }
 
         /* Action Bar */
@@ -201,7 +198,7 @@
             background: #f8fafc;
             transition: all 0.3s ease;
         }
-        
+
         .upload-zone-content.drag-over {
             border-color: var(--primary);
             background: #eff6ff;
@@ -277,7 +274,7 @@
             font-family: inherit;
             min-width: 150px;
         }
-        
+
         .cb-label {
             display: inline-flex;
             align-items: center;
@@ -399,7 +396,7 @@
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-20px); }
         }
-        
+
         /* Toast Notification */
         #toast-container {
             position: fixed;
@@ -407,7 +404,7 @@
             right: 20px;
             z-index: 10000;
         }
-        
+
         .toast {
             background: var(--text-main);
             color: white;
@@ -422,7 +419,7 @@
             transform: translateX(100%);
             transition: all 0.3s ease;
         }
-        
+
         .toast.show {
             opacity: 1;
             transform: translateX(0);
@@ -450,7 +447,7 @@
             <p data-i18n="dragDesc">Hệ thống sẽ tự động phân tích và tính toán các tỷ lệ chất lượng ngay lập tức</p>
         </div>
     </div>
-    
+
     <div id="toast-container"></div>
 
     <div class="app-container" id="printable-area">
@@ -464,7 +461,7 @@
                     <p class="subtitle" data-i18n="subTitle">Phân tích FPY (직행율), Lỗi thực tế (불량율), & Hiệu suất sau sửa (수율)</p>
                 </div>
             </div>
-            
+
             <div class="action-bar no-print">
                 <div class="language-selector">
                     <button id="btn-lang-vi" class="btn-lang active" onclick="changeLanguage('vi')">VI</button>
@@ -477,8 +474,6 @@
         </header>
 
         <main class="dashboard-grid">
-            
-            <!-- Drag & Drop Zone -->
             <section class="card upload-card no-print" id="upload-zone">
                 <div class="upload-zone-content" id="drop-zone">
                     <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
@@ -491,7 +486,6 @@
                 </div>
             </section>
 
-            <!-- Tabs Navigation -->
             <div class="tabs-container no-print" id="main-tabs" style="display: none;">
                 <button class="tab-btn active" data-target="tab-dashboard" onclick="switchTab('tab-dashboard')">
                     <i class="fa-solid fa-chart-pie"></i> <span data-i18n="tabDashboard">Báo cáo Tổng hợp</span>
@@ -501,19 +495,17 @@
                 </button>
             </div>
 
-            <!-- TAB 1: DASHBOARD -->
             <div id="tab-dashboard" class="tab-content" style="display: none;">
-                <!-- Filter Controls Panel -->
                 <section class="card filter-card no-print">
                     <div class="filter-group-container">
                         <div class="filter-item">
-                            <label for="filter-model"><i class="fa-solid fa-microchip"></i> <span data-i18n="filterModelLabel">Chọn Model:</span></label>
+                            <label parent="filter-model"><i class="fa-solid fa-microchip"></i> <span data-i18n="filterModelLabel">Chọn Model:</span></label>
                             <select id="filter-model" onchange="applyFilters()">
                                 <option value="ALL" data-i18n="typeAll">Total All Model</option>
                             </select>
                         </div>
                         <div class="filter-item">
-                            <label for="filter-prod-type"><i class="fa-solid fa-box-open"></i> <span data-i18n="filterTypeLabel">Loại sản phẩm:</span></label>
+                            <label parent="filter-prod-type"><i class="fa-solid fa-box-open"></i> <span data-i18n="filterTypeLabel">Loại sản phẩm:</span></label>
                             <select id="filter-prod-type" onchange="applyFilters()">
                                 <option value="ALL" data-i18n="typeAll">Tất cả (All)</option>
                                 <option value="Mass" data-i18n="typeMass">Hàng loạt (Mass)</option>
@@ -526,11 +518,10 @@
                     </div>
                 </section>
 
-                <!-- Summary Tables Container -->
                 <section class="card table-card" id="summary-table-panel">
                     <div class="card-header">
                         <h2>
-                            <i class="fa-solid fa-layer-group"></i> 
+                            <i class="fa-solid fa-layer-group"></i>
                             <span data-i18n="tableSummaryTitle">Bảng Tổng Hợp (Total)</span>
                         </h2>
                     </div>
@@ -556,16 +547,14 @@
                                 </tr>
                             </thead>
                             <tbody id="summary-yield-table-body">
-                                <!-- Data injected via JS -->
-                            </tbody>
+                                </tbody>
                         </table>
                     </div>
                 </section>
 
-                <!-- Yield Chart Card -->
                 <section class="card chart-card" id="chart-panel">
                     <div class="card-header">
-                        <h2><i class="fa-solid fa-chart-line"></i> <span data-i18n="chartTitle">Biểu đồ xu hướng 비율</span></h2>
+                        <h2><i class="fa-solid fa-chart-line"></i> <span data-i18n="chartTitle">Biểu đồ xu hướng tỷ lệ</span></h2>
                     </div>
                     <div class="chart-container">
                         <canvas id="yieldChart"></canvas>
@@ -573,7 +562,6 @@
                 </section>
             </div>
 
-            <!-- TAB 2: WORST DEFECTS -->
             <div id="tab-worst" class="tab-content" style="display: none;">
                 <section class="card filter-card no-print">
                     <div class="filter-group-container">
@@ -587,11 +575,10 @@
                         <div class="filter-item">
                             <label><i class="fa-solid fa-microchip"></i> <span data-i18n="thProcess">Process:</span></label>
                             <div id="worst-process-filters">
-                                <!-- Generated dynamically -->
-                            </div>
+                                </div>
                         </div>
                         <div class="filter-item">
-                            <label for="worst-defect-category"><i class="fa-solid fa-filter"></i> <span data-i18n="filterCategory">Phân loại:</span></label>
+                            <label parent="worst-defect-category"><i class="fa-solid fa-filter"></i> <span data-i18n="filterCategory">Phân loại:</span></label>
                             <select id="worst-defect-category" onchange="renderWorstTable()">
                                 <option value="fpy" data-i18n="catFPY">직행율 (FPY - All Defects)</option>
                                 <option value="true" data-i18n="catTrue">불량율 (진성불량 - True Defects)</option>
@@ -599,13 +586,13 @@
                             </select>
                         </div>
                         <div class="filter-item">
-                            <label for="worst-filter-model"><span data-i18n="filterModelLabel">Model:</span></label>
+                            <label parent="worst-filter-model"><span data-i18n="filterModelLabel">Model:</span></label>
                             <select id="worst-filter-model" onchange="renderWorstTable()">
                                 <option value="ALL" data-i18n="typeAll">Tất cả (All)</option>
                             </select>
                         </div>
                         <div class="filter-item">
-                            <label for="worst-filter-month"><span data-i18n="thMonth">Tháng:</span></label>
+                            <label parent="worst-filter-month"><span data-i18n="thMonth">Tháng:</span></label>
                             <select id="worst-filter-month" onchange="renderWorstTable()">
                                 <option value="ALL" data-i18n="typeAll">Tất cả (All)</option>
                                 <option value="1">1</option><option value="2">2</option><option value="3">3</option>
@@ -620,7 +607,7 @@
                 <section class="card table-card">
                     <div class="card-header">
                         <h2>
-                            <i class="fa-solid fa-list-ol"></i> 
+                            <i class="fa-solid fa-list-ol"></i>
                             <span data-i18n="worstTableTitle">Bảng xếp hạng Worst Defect</span>
                         </h2>
                     </div>
@@ -636,14 +623,12 @@
                                 </tr>
                             </thead>
                             <tbody id="worst-table-body">
-                                <!-- Data injected via JS -->
-                            </tbody>
+                                </tbody>
                         </table>
                     </div>
                 </section>
             </div>
 
-            <!-- Data Column mapping Information -->
             <section class="card info-card no-print" id="info-panel">
                 <h2 data-i18n="infoTitle"><i class="fa-solid fa-circle-question"></i> Hướng dẫn cấu trúc cột trong Sheet "DATA"</h2>
                 <div class="info-grid">
@@ -673,9 +658,9 @@
                     <div class="info-col">
                         <h4>3. Công thức tính (Formulas)</h4>
                         <ul>
-                            <li><strong>직행율 (FPY)</strong>: Tính trên tổng lỗi Cột L. <br><code>(Input - Total Lỗi) / Input * 100</code></li>
-                            <li><strong>불량율 (Defect)</strong>: Bỏ lỗi "Return line". <br><code>(Lỗi Thực Tế / Input) * 100</code></li>
-                            <li><strong>수율 (Yield)</strong>: Lỗi bị "hủy" (Scrap). <br><code>(Input - Scrap) / Input * 100</code></li>
+                            <li><strong>직행율 (FPY)</strong>: Tính trên tổng lỗi Cột L.<br><code>(Input - Total Lỗi) / Input * 100</code></li>
+                            <li><strong>불량율 (Defect)</strong>: Bỏ lỗi "Return line".<br><code>(Lỗi Thực Tế / Input) * 100</code></li>
+                            <li><strong>수율 (Yield)</strong>: Lỗi bị "hủy" (Scrap).<br><code>(Input - Scrap) / Input * 100</code></li>
                         </ul>
                     </div>
                 </div>
@@ -686,9 +671,10 @@
             <p id="footer-text" data-i18n="footerText">&copy; 2026 Quality Performance Report. Processed locally.</p>
         </footer>
     </div>
-    
+
     <script>
-        /** * --- STATE MANAGEMENT ---
+        /**
+         * --- STATE MANAGEMENT ---
          */
         let rawData = [];
         let parsedMetrics = {
@@ -784,20 +770,21 @@
                     el.innerHTML = i18n[lang][key];
                 }
             });
-            
-            // Fix table header month text based on language
+
+            // 테이블 헤더의 월 단위 텍스트 다국어 처리 수정
             const thUnits = document.querySelectorAll('th span[data-i18n="thMonthUnit"]');
             thUnits.forEach((el, index) => {
-                if(lang === 'ko') el.innerText = "월";
-                else el.innerText = "";
-                if(lang === 'vi') el.parentElement.innerHTML = "Tháng " + (index + 1) + "<span data-i18n='thMonthUnit' style='display:none'></span>";
-                else el.parentElement.innerHTML = (index + 1) + "<span data-i18n='thMonthUnit'>월</span>";
+                if (lang === 'ko') {
+                    el.parentElement.innerHTML = (index + 1) + "<span data-i18n='thMonthUnit'>월</span>";
+                } else {
+                    el.parentElement.innerHTML = "Tháng " + (index + 1) + "<span data-i18n='thMonthUnit' style='display:none'></span>";
+                }
             });
 
             document.getElementById('btn-lang-vi').classList.toggle('active', lang === 'vi');
             document.getElementById('btn-lang-ko').classList.toggle('active', lang === 'ko');
 
-            if(parsedMetrics.inputs.length > 0) {
+            if (parsedMetrics.inputs.length > 0) {
                 renderDashboard();
                 renderWorstTable();
             }
@@ -809,7 +796,7 @@
             toast.className = `toast ${type}`;
             toast.innerHTML = type === 'success' ? `<i class="fa-solid fa-check-circle"></i> ${message}` : `<i class="fa-solid fa-circle-exclamation"></i> ${message}`;
             container.appendChild(toast);
-            
+
             setTimeout(() => toast.classList.add('show'), 10);
             setTimeout(() => {
                 toast.classList.remove('show');
@@ -830,11 +817,11 @@
         function exportPDF() {
             const element = document.getElementById('printable-area');
             const opt = {
-                margin:       10,
-                filename:     `Quality_Report_${new Date().toISOString().slice(0,10)}.pdf`,
-                image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true },
-                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'landscape' }
+                margin: 10,
+                filename: `Quality_Report_${new Date().toISOString().slice(0, 10)}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' }
             };
             html2pdf().set(opt).from(element).save();
         }
@@ -870,12 +857,12 @@
             overlay.classList.remove('active');
             const dt = e.dataTransfer;
             const files = dt.files;
-            if(files.length) handleFile(files[0]);
+            if (files.length) handleFile(files[0]);
         });
 
         function handleFileSelect(e) {
             const files = e.target.files;
-            if(files.length) handleFile(files[0]);
+            if (files.length) handleFile(files[0]);
         }
 
         /**
@@ -883,22 +870,21 @@
          */
         function handleFile(file) {
             const reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = function (e) {
                 try {
                     const data = new Uint8Array(e.target.result);
-                    const workbook = XLSX.read(data, {type: 'array'});
-                    
+                    const workbook = XLSX.read(data, { type: 'array' });
+
                     const sheetName = workbook.SheetNames.find(s => s.toUpperCase() === 'DATA');
                     if (!sheetName) {
                         showToast(currentLang === 'ko' ? '"DATA" 시트를 찾을 수 없습니다.' : 'Không tìm thấy Sheet "DATA"!', 'error');
                         return;
                     }
 
-                    // A:0, B:1... U:20, W:22, X:23, Y:24, Z:25, D:3, F:5, G:6, H:7, J:9, L:11, M:12, O:14
-                    const rows = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], {header: "A", defval: ""});
+                    const rows = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], { header: "A", defval: "" });
                     processExcelData(rows);
-                    
-                } catch(error) {
+
+                } catch (error) {
                     console.error(error);
                     showToast(currentLang === 'ko' ? '파일 파싱 오류 발생.' : 'Lỗi khi đọc file!', 'error');
                 }
@@ -916,21 +902,20 @@
             let models = new Set();
             let processes = new Set();
 
-            // Skip header row usually (index 0 or 1), but we verify by checking if qty is a number
             rows.forEach((row, index) => {
                 // Parse Inputs
                 let inputQty = parseFloat(row['Y']);
                 if (!isNaN(inputQty) && inputQty > 0) {
                     let model = safeString(row['W']);
                     let process = safeString(row['X']);
-                    let type = safeString(row['U']); // Mass / Sample
+                    let type = safeString(row['U']);
                     let monthStr = String(row['Z']).replace(/[^0-9]/g, '');
                     let month = parseInt(monthStr);
 
-                    if(model && month >= 1 && month <= 12) {
+                    if (model && month >= 1 && month <= 12) {
                         inputs.push({ model, process, type, month, qty: inputQty });
                         models.add(model);
-                        if(process) processes.add(process);
+                        if (process) processes.add(process);
                     }
                 }
 
@@ -940,16 +925,16 @@
                     let model = safeString(row['F']);
                     let type = safeString(row['D']);
                     let process = safeString(row['G']);
-                    let method = safeString(row['M']); // Rework, Return line, hủy
-                    let isFake = safeString(row['H']); 
-                    let defectName = safeString(row['J']) || (currentLang==='ko'?'알수없음':'Không rõ');
+                    let method = safeString(row['M']);
+                    let isFake = safeString(row['H']);
+                    let defectName = safeString(row['J']) || (currentLang === 'ko' ? '알수없음' : 'Không rõ');
                     let monthStr = String(row['O']).replace(/[^0-9]/g, '');
                     let month = parseInt(monthStr);
 
-                    if(model && month >= 1 && month <= 12) {
+                    if (model && month >= 1 && month <= 12) {
                         defects.push({ model, type, process, method, isFake, defectName, month, qty: defectQty });
                         models.add(model);
-                        if(process) processes.add(process);
+                        if (process) processes.add(process);
                     }
                 }
             });
@@ -960,15 +945,14 @@
             }
 
             parsedMetrics = { inputs, defects, models: Array.from(models).sort(), processes: Array.from(processes).sort() };
-            
-            // Setup UI Dropdowns
+
             setupFilters();
-            
+
             document.getElementById('upload-zone').style.display = 'none';
             document.getElementById('info-panel').style.display = 'none';
             document.getElementById('main-tabs').style.display = 'flex';
             switchTab('tab-dashboard');
-            
+
             applyFilters();
             showToast(currentLang === 'ko' ? '데이터 분석이 완료되었습니다.' : 'Phân tích dữ liệu thành công!');
         }
@@ -976,8 +960,8 @@
         function setupFilters() {
             const modelSelect = document.getElementById('filter-model');
             const worstModelSelect = document.getElementById('worst-filter-model');
-            
-            const defaultOpt = `<option value="ALL">${currentLang==='ko'?'전체 (Total All)':'Tất cả (Total All)'}</option>`;
+
+            const defaultOpt = `<option value="ALL">${currentLang === 'ko' ? '전체 (Total All)' : 'Tất cả (Total All)'}</option>`;
             modelSelect.innerHTML = defaultOpt;
             worstModelSelect.innerHTML = defaultOpt;
 
@@ -989,8 +973,8 @@
             const processContainer = document.getElementById('worst-process-filters');
             processContainer.innerHTML = '';
             parsedMetrics.processes.forEach(p => {
-                if(p) {
-                    processContainer.innerHTML += `<label class="cb-label"><input type="checkbox" class="cb-worst-process" value="${p}" checked onchange="renderWorstTable()"> ${p}</label>`;
+                if (p) {
+                    processContainer.innerHTML += `<label class="cb-label"><input type="checkbox" class="cb-worst-process" value="${p}" checked onchange="renderWorstTable()">${p}</label>`;
                 }
             });
         }
@@ -1004,14 +988,12 @@
         }
 
         function getFilteredData(targetModel, targetType) {
-            // Filter Inputs
             let filteredInputs = parsedMetrics.inputs.filter(i => {
                 if (targetModel !== 'ALL' && i.model !== targetModel) return false;
                 if (targetType !== 'ALL' && !i.type.includes(targetType.toUpperCase())) return false;
                 return true;
             });
 
-            // Filter Defects
             let filteredDefects = parsedMetrics.defects.filter(d => {
                 if (targetModel !== 'ALL' && d.model !== targetModel) return false;
                 if (targetType !== 'ALL' && !d.type.includes(targetType.toUpperCase())) return false;
@@ -1023,44 +1005,38 @@
 
         function calculateMonthlyMetrics(inputs, defects) {
             let monthly = {};
-            for(let i=1; i<=12; i++) {
+            for (let i = 1; i <= 12; i++) {
                 monthly[i] = { inputQty: 0, totalDefects: 0, trueDefects: 0, scrapDefects: 0 };
             }
 
-            // Theo HD: Cột Y (Input). Tính tổng TB 3 Process -> Tổng Y / 3
-            // Vì dữ liệu thực tế có thể không đủ 3 process mỗi tháng, ta gộp tổng Input cho an toàn theo tháng, rồi chia 3
             let inputSumByMonth = {};
             inputs.forEach(i => {
-                if(!inputSumByMonth[i.month]) inputSumByMonth[i.month] = 0;
+                if (!inputSumByMonth[i.month]) inputSumByMonth[i.month] = 0;
                 inputSumByMonth[i.month] += i.qty;
             });
 
-            for(let i=1; i<=12; i++) {
-                // Divide by 3 as requested in the info text: "Tính tổng TB 3 Process"
-                if(inputSumByMonth[i]) {
+            for (let i = 1; i <= 12; i++) {
+                if (inputSumByMonth[i]) {
                     monthly[i].inputQty = inputSumByMonth[i] / 3;
                 }
             }
 
             defects.forEach(d => {
-                monthly[d.month].totalDefects += d.qty; // For FPY
-                
-                // True Defect (Bỏ Return line)
-                if(!d.method.includes('RETURN') && !d.method.includes('RETURN LINE')) {
+                monthly[d.month].totalDefects += d.qty;
+
+                if (!d.method.includes('RETURN') && !d.method.includes('RETURN LINE')) {
                     monthly[d.month].trueDefects += d.qty;
                 }
-                
-                // Scrap (hủy / huy)
-                if(d.method.includes('HỦY') || d.method.includes('HUY') || d.method.includes('SCRAP') || d.method.includes('DISCARD')) {
+
+                if (d.method.includes('HỦY') || d.method.includes('HUY') || d.method.includes('SCRAP') || d.method.includes('DISCARD')) {
                     monthly[d.month].scrapDefects += d.qty;
                 }
             });
 
-            // Calculate Rates
             let result = {};
             let totalSummary = { inputQty: 0, totalDefects: 0, trueDefects: 0, scrapDefects: 0 };
 
-            for(let i=1; i<=12; i++) {
+            for (let i = 1; i <= 12; i++) {
                 let m = monthly[i];
                 totalSummary.inputQty += m.inputQty;
                 totalSummary.totalDefects += m.totalDefects;
@@ -1092,22 +1068,28 @@
             const { filteredInputs, filteredDefects } = getFilteredData(modelFilter, typeFilter);
             const metrics = calculateMonthlyMetrics(filteredInputs, filteredDefects);
 
-            // Render Table
             const tbody = document.getElementById('summary-yield-table-body');
             tbody.innerHTML = '';
-            
+
             const koNames = { fpy: '직행율 (FPY)', defect: '불량율 (Defect)', yield: '수율 (Yield)' };
             const viNames = { fpy: 'Tỷ lệ FPY', defect: 'Tỷ lệ lỗi (True)', yield: 'Hiệu suất (Sau sửa)' };
             const names = currentLang === 'ko' ? koNames : viNames;
 
+            // HTML 중첩 및 태그 미매칭 오류가 수정된 makeRow 함수
             const makeRow = (itemName, key, badgeClass) => {
                 let html = `<tr>
                     <td><strong>${modelFilter}</strong></td>
                     <td><span class="badge ${badgeClass}">${itemName}</span></td>`;
-                for(let i=1; i<=12; i++) {
-                    html += `<td>${metrics[i][key] !== '-' ? metrics[i][key] + '%' : '-'}</td>`;
+                
+                for (let i = 1; i <= 12; i++) {
+                    let val = metrics[i][key];
+                    html += `<td>${val !== '-' ? val + '%' : '-'}</td>`;
                 }
-                html += `<td><strong>${metrics['Total'][key] !== '-' ? metrics['Total'][key] + '%' : '-'}</strong></td></tr>`;
+                
+                let totVal = metrics['Total'][key];
+                html += `<td><strong>${totVal !== '-' ? totVal + '%' : '-'}</strong></td>
+                </tr>`;
+                
                 return html;
             };
 
@@ -1115,19 +1097,18 @@
             tbody.innerHTML += makeRow(names.defect, 'defectRate', 'badge-defect');
             tbody.innerHTML += makeRow(names.yield, 'yield', 'badge-yield');
 
-            // Render Chart
             renderChart(metrics, modelFilter);
         }
 
         function renderChart(metrics, modelName) {
             const ctx = document.getElementById('yieldChart').getContext('2d');
-            
-            if(yieldChartInstance) {
+
+            if (yieldChartInstance) {
                 yieldChartInstance.destroy();
             }
 
             const labels = [];
-            for(let i=1; i<=12; i++) {
+            for (let i = 1; i <= 12; i++) {
                 labels.push(currentLang === 'ko' ? `${i}월` : `Tháng ${i}`);
             }
 
@@ -1135,7 +1116,7 @@
             const dataDefect = [];
             const dataYield = [];
 
-            for(let i=1; i<=12; i++) {
+            for (let i = 1; i <= 12; i++) {
                 dataFpy.push(metrics[i].fpy !== '-' ? parseFloat(metrics[i].fpy) : null);
                 dataDefect.push(metrics[i].defectRate !== '-' ? parseFloat(metrics[i].defectRate) : null);
                 dataYield.push(metrics[i].yield !== '-' ? parseFloat(metrics[i].yield) : null);
@@ -1188,7 +1169,7 @@
                     plugins: {
                         tooltip: {
                             callbacks: {
-                                label: function(context) {
+                                label: function (context) {
                                     return context.dataset.label + ': ' + context.parsed.y + '%';
                                 }
                             }
@@ -1199,7 +1180,7 @@
                             min: 0,
                             max: 100,
                             ticks: {
-                                callback: function(value) {
+                                callback: function (value) {
                                     return value + '%';
                                 }
                             }
@@ -1224,58 +1205,52 @@
                 let matchProcess = processes.includes(d.process);
                 let matchModel = model === 'ALL' ? true : d.model === model;
                 let matchMonth = month === 'ALL' ? true : d.month === parseInt(month);
-                
+
                 if (!matchType || !matchProcess || !matchModel || !matchMonth) return false;
 
-                // Category filtering
-                if(category === 'true') {
-                    // Exclude Return Line
-                    if(d.method.includes('RETURN') || d.method.includes('RETURN LINE')) return false;
+                if (category === 'true') {
+                    if (d.method.includes('RETURN') || d.method.includes('RETURN LINE')) return false;
                 } else if (category === 'scrap') {
-                    // Only Scrap
-                    if(!(d.method.includes('HỦY') || d.method.includes('HUY') || d.method.includes('SCRAP') || d.method.includes('DISCARD'))) return false;
+                    if (!(d.method.includes('HỦY') || d.method.includes('HUY') || d.method.includes('SCRAP') || d.method.includes('DISCARD'))) return false;
                 }
-                // 'fpy' includes all, no extra filter needed
                 return true;
             });
 
-            // Aggregate
             let summaryMap = {};
             defects.forEach(d => {
-                let key = `${d.model}||${d.process}||${d.defectName}`;
-                if(!summaryMap[key]) {
+                let key = `${d.model} || ${d.process} || ${d.defectName}`;
+                if (!summaryMap[key]) {
                     summaryMap[key] = { model: d.model, process: d.process, name: d.defectName, qty: 0 };
                 }
                 summaryMap[key].qty += d.qty;
             });
 
-            let sortedArr = Object.values(summaryMap).sort((a, b) => b.qty - a.qty).slice(0, 20); // Top 20
+            let sortedArr = Object.values(summaryMap).sort((a, b) => b.qty - a.qty).slice(0, 20);
 
             const tbody = document.getElementById('worst-table-body');
             tbody.innerHTML = '';
 
-            if(sortedArr.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="5" style="text-align:center">${currentLang==='ko'?'데이터가 없습니다.':'Không có dữ liệu.'}</td></tr>`;
+            if (sortedArr.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" style="text-align:center">${currentLang === 'ko' ? '데이터가 없습니다.' : 'Không có dữ liệu.'}</td></tr>`;
                 return;
             }
 
             sortedArr.forEach((item, index) => {
                 let badgeClass = index < 3 ? 'badge-defect' : '';
                 tbody.innerHTML += `
-                    <tr>
-                        <td style="text-align:left"><span class="badge ${badgeClass}">Top ${index + 1}</span></td>
-                        <td>${item.model}</td>
-                        <td>${item.process}</td>
-                        <td style="text-align:left"><strong>${item.name}</strong></td>
-                        <td>${item.qty.toLocaleString()}</td>
-                    </tr>
+                <tr>
+                    <td style="text-align:left"><span class="badge ${badgeClass}">Top ${index + 1}</span></td>
+                    <td>${item.model}</td>
+                    <td>${item.process}</td>
+                    <td style="text-align:left"><strong>${item.name}</strong></td>
+                    <td>${item.qty.toLocaleString()}</td>
+                </tr>
                 `;
             });
         }
-        
+
         // Initialize default language
         changeLanguage('vi');
-
     </script>
 </body>
 </html>
